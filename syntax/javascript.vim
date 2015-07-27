@@ -1,7 +1,7 @@
 " Vim syntax file
 "      Language: JavaScript
 "    Maintainer: Jose Elera Campana <https://github.com/jelera>
-" Last Modified: Sun 26 Jul 2015 08:34:33 PM CDT
+" Last Modified: Sun 26 Jul 2015 09:43:11 PM CDT
 "       Version: 1.0a
 "       Changes: Go to https://github.com/jelera/vim-javascript-syntax for
 "                recent changes.
@@ -56,12 +56,14 @@ syntax keyword javascriptGlobalObjects  Array Boolean Date Function Math Number 
 syntax keyword javascriptExceptions     try catch throw finally Error EvalError RangeError ReferenceError SyntaxError TypeError URIError
 syntax keyword javascriptReserved       abstract enum int short boolean export interface static byte extends long super char final native synchronized class float package throws const goto private transient debugger implements protected volatile double import public
 "}}}
+
 " Comments {{{
 syntax keyword javascriptCommentTodo      TODO FIXME XXX TBD contained
 syntax match   javascriptLineComment      "\/\/.*" contains=@Spell,javascriptCommentTodo
 syntax match   javascriptCommentSkip      "^[ \t]*\*\($\|[ \t]\+\)"
 syntax region  javascriptComment          start="/\*"  end="\*/" contains=@Spell,javascriptCommentTodo
 "}}}
+
 " JSDoc support {{{
 if !exists("javascript_ignore_javascriptdoc")
 	syntax case ignore
@@ -79,6 +81,7 @@ if !exists("javascript_ignore_javascriptdoc")
 endif
 	syntax case match
 "}}}
+
 " Strings, Numbers and Regex Highlight {{{
 syntax match   javascriptSpecial          "\\\d\d\d\|\\."
 syntax region  javascriptString           start=+"+  skip=+\\\\\|\\"+  end=+"\|$+	contains=javascriptSpecial,@htmlPreproc
@@ -89,6 +92,7 @@ syntax match   javascriptNumber           "-\=\<\d\+L\=\>\|0[xX][0-9a-fA-F]\+\>"
 syntax region  javascriptRegexpString     start=+/[^/*]+me=e-1 skip=+\\\\\|\\/+ end=+/[gim]\{0,2\}\s*$+ end=+/[gim]\{0,2\}\s*[;.,)\]}]+me=e-1 contains=@htmlPreproc oneline
 syntax match   javascriptFloat          /\<-\=\%(\d\+\.\d\+\|\d\+\.\|\.\d\+\)\%([eE][+-]\=\d\+\)\=\>/
 "}}}
+
 "  DOM, Browser and Ajax Support   {{{
 syntax keyword javascriptBrowserObjects           window navigator screen history location
 
@@ -109,6 +113,7 @@ syntax keyword javascriptEventListenerKeywords    blur click focus mouseover mou
 
 syntax keyword javascriptEventListenerMethods     scrollIntoView  addEventListener  dispatchEvent  removeEventListener preventDefault stopPropagation
 " }}}
+
 " DOM/HTML5/CSS specified things {{{
 	" Web API Interfaces (very long list of keywords) {{{
 	" syntax keyword javascriptWebAPI  AbstractWorker AnalyserNode AnimationEvent App Apps ArrayBuffer ArrayBufferView Attr AudioBuffer AudioBufferSourceNode AudioContext AudioDestinationNode AudioListener AudioNode AudioParam AudioProcessingEvent BatteryManager BiquadFilterNode Blob BlobBuilder BlobEvent CallEvent CameraCapabilities CameraControl CameraManager CanvasGradient CanvasImageSource CanvasPattern CanvasPixelArray CanvasRenderingContext2D CaretPosition CDATASection ChannelMergerNode ChannelSplitterNode CharacterData ChildNode ChromeWorker ClipboardEvent CloseEvent Comment CompositionEvent Connection Console ContactManager ConvolverNode Coordinates CSS CSSConditionRule CSSGroupingRule CSSKeyframeRule CSSKeyframesRule CSSMediaRule CSSNamespaceRule CSSPageRule CSSRule CSSRuleList CSSStyleDeclaration CSSStyleRule CSSStyleSheet CSSSupportsRule CustomEvent
@@ -161,6 +166,36 @@ syntax keyword javascriptEventListenerMethods     scrollIntoView  addEventListen
 	"}}}
 	endif
 " end DOM/HTML/CSS specified things }}}
+
+" Node.js Support {{{
+syntax keyword nodejsObjects console Buffer cluster worker crypto dns domain require exports Server ServerResponse Agent ClientRequest IncomingMessage os
+	" Console {{{
+	syntax keyword nodejsConsoleMethods   log info error warn dir time timeEnd trace assert
+	syntax keyword nodejsBufferMethods    isEncoding isBuffer byteLength concat compare writeUIntLE writeUIntBE writeIntLE writeIntBE readUIntLE readUIntBE readIntLE readIntBE toString toJSON equals copy slice fill
+	syntax keyword nodejsClusterMethods   schedulingPolicy settings isMaster isWorker setupMaster fork disconnect worker workers
+	syntax keyword nodejsWorkerMethods    id process suicide send kill isDead isConnected
+	syntax keyword nodejsCryptoMethods    setEngine getCiphers getHashes createCredentials createHash update digest createHmac createCipher createCipheriv final setAutoPadding getAuthTag setAAD createDecipher createDecipheriv createSign sign createVerify createDiffieHellman verifyError generateKeys computerSecret getPrime getGenerator getPublicKey getPrivateKey setPublicKey setPrivateKey createECDH generateKeys pbkdf2 pbkdf2Sync randomBytes pseudoRandomBytes verifySpkac exportChallenge exportPublicKey publicEncrypt privateDecrypt DEFAULT_ENCODING
+	syntax keyword nodejsDNSMethods       lookup lookupService resolve resolve4 resolve6 resolveMx resolveTxt resolveSrv resolveSoa resolveNs resolveCname reverse getServers setServers
+	syntax keyword nodejsDomainMethods    run members add remove bind intercept enter exit dispose
+	syntax keyword nodejsEventsMethods    on once addListener removeListener removeAllListeners setMaxListeners defaultMaxListeners listeners emit listenerCount
+	syntax keyword nodejsFileSystemMethods rename renameSync ftruncate ftruncateSync truncate truncateSync chown chownSync fchown fchownSync lchown lchownSync chmod chmodSync fchmod fchmodSync lchmod lchmodSync stat lstat fstat statSync lstatSync fstatSync link linkSync symlink symlinkSync readlink readlinkSync realpath realpathSync unlink unlinkSync rmdir rmdirSync mkdir mkdirSync readdir readdirSync close closeSync open openSync utimes utimesSync futimes futimesSync fsync fsyncSync writeSync read readSync readFile readFileSync writeFile writeFileSync appendFile appendFileSync watchFile unwatchFile watch exists existsSync access accessSync Stats createReadSteam ReadStream createWriteSteam WriteSteam bytesWritten FSWatcher
+	syntax keyword nodejsGlobalObjects    cache extensions
+	syntax keyword nodejsHTTPMethods     METHODS STATUS_CODES createServer createClient listen close maxHeadersCount timeout writeContinue writeHead statusCode statusMessage setHeader headersSent sendDate getHeader removeHeader addTrailers end get request maxSockets maxFreeSockets sockets freeSockets destroy getName flushHeaders abort setNoDelay setSocketKeepAlive httpVersion headers rawHeaders trailers rawTrailers url socket
+	syntax keyword nodejsHTTPSMethods     globalAgent
+	syntax keyword nodejsNetMethods       connect createConnection address unref ref maxConnections connections getConnections bufferSize destroy pause resume setKeepAlive remoteAddress remoteFamily remotePort localAddress localPort bytesRead bytesWritten isIP isIPv4 isIPv6
+	syntax keyword nodejsOSMethods        tmpdir endianness hostname type platform arch release uptime loadavg totalmem freemem cpus networkinterfaces EOL
+	syntax keyword nodejsPathMethods      join dirname isAbsolute relative basename extname sep delimiter parse format posix win32
+	syntax keyword nodejsProcessMethods   stdout stderr stdin argv execPath execArgv abort chdir cwd env exit getgid setgid getuid setuid getgroups setgroups initgroups version versions config kill pid memoryUsage nextTick umask uptime hrtime mainModule
+	syntax keyword nodejsPunycodeMethods  decode encode toUnicode toASCII usc2
+	syntax keyword nodejsQueryStringMethods stringify
+	syntax keyword nodejsReadlineMethods  setPrompt question cursorTo moveCursor clearLine clearScreenDown
+	syntax keyword nodejsSmallocMethods   alloc coyOnto hasExternalData kMaxLength Types
+	syntax keyword nodejsStreamMethods    isPaused pipe unpipe wrap cork uncork setDefaultEncoding Duplex Transform
+	syntax keyword nodejsTimersMethods    setImmediate clearImmediate
+
+	"}}}
+" end Node.js Support }}}
+
 " Code blocks"{{{
 syntax cluster javascriptAll       contains=javascriptComment,javascriptLineComment,JSDocComment,javascriptString,javascriptRegexpString,javascriptNumber,javascriptFloat,javascriptLabel,javascriptSource,javascriptWebAPI,javascriptOperator,javascriptBoolean,javascriptNull,javascriptFuncKeyword,javascriptConditional,javascriptGlobal,javascriptRepeat,javascriptBranch,javascriptStatement,javascriptGlobalObjects,javascriptMessage,javascriptIdentifier,javascriptExceptions,javascriptReserved,javascriptDeprecated,javascriptDomErrNo,javascriptDomNodeConsts,javascriptHtmlEvents,javascriptDotNotation,javascriptBrowserObjects,javascriptDOMObjects,javascriptAjaxObjects,javascriptPropietaryObjects,javascriptDOMMethods,javascriptHtmlElemProperties,javascriptDOMProperties,javascriptEventListenerKeywords,javascriptEventListenerMethods,javascriptAjaxProperties,javascriptAjaxMethods,javascriptFuncArg
 
@@ -170,6 +205,7 @@ if main_syntax == "javascript"
 	" syntax sync match javascriptHighlight grouphere javascriptBlock /{/
 endif
 "}}}
+
 " Function and arguments highlighting {{{
 syntax keyword javascriptFuncKeyword     function contained
 syntax region  javascriptFuncExp         start=/\w\+\s\==\s\=function\>/ end="\([^)]*\)" contains=javascriptFuncEq,javascriptFuncKeyword,javascriptFuncArg keepend
@@ -178,6 +214,7 @@ syntax match   javascriptFuncComma       /,/ contained
 syntax match   javascriptFuncEq          /=/ contained
 syntax region  javascriptFuncDef         start="\<function\>" end="\([^)]*\)" contains=javascriptFuncKeyword,javascriptFuncArg keepend
 "}}}
+
 " Braces, Parens, symbols, colons {{{
 syntax match javascriptBraces       "[{}\[\]]"
 syntax match javascriptParens       "[()]"
@@ -185,6 +222,7 @@ syntax match javascriptOpSymbols    "=\{1,3}\|!==\|!=\|<\|>\|>=\|<=\|++\|+=\|--\
 syntax match javascriptEndColons    "[;,]"
 syntax match javascriptLogicSymbols "\(&&\)\|\(||\)"
 "}}}
+
 " JavaScriptFold Function {{{
 
 function! JavaScriptFold()
@@ -194,6 +232,7 @@ function! JavaScriptFold()
 endfunction
 
 " }}}
+
 " Highlight links {{{
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
