@@ -1,7 +1,7 @@
 " Vim syntax file
 "      Language: JavaScript
 "    Maintainer: Jose Elera Campana <https://github.com/jelera>
-" Last Modified: Sun 26 Jul 2015 07:54:13 PM CDT
+" Last Modified: Sun 26 Jul 2015 08:00:26 PM CDT
 "       Version: 1.0a
 "       Changes: Go to https://github.com/jelera/vim-javascript-syntax for
 "                recent changes.
@@ -69,11 +69,11 @@ if !exists("javascript_ignore_javascriptdoc")
 	" syntax coloring for JSDoc comments (HTML)
 	"unlet b:current_syntax
 
-	syntax region javascriptDocComment        matchgroup=javascriptComment start="/\*\*\s*$"  end="\*/" contains=javascriptDocTags,javascriptCommentTodo,@javascriptHtml,jsInJsdocExample,@Spell fold
-	syntax match  javascriptDocTags           contained "@\(param\|argument\|returns\=\|requires\|exception\|throws\|type\|class\|extends\|see\|link\|member\|module\|method\|title\|namespace\|name\|memberof\|exports\|callback\|typedef\|property\|optional\|default\|base\|file\)\>" nextgroup=javascriptDocParam,javascriptDocSeeTag skipwhite
-	syntax match  javascriptDocTags           contained "@\(beta\|deprecated\|description\|fileoverview\|author\|license\|version\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
-	syntax match  javascriptDocParam          contained "\%(#\|\w\|\.\|:\|\/\)\+"
-	syntax region javascriptDocSeeTag         contained matchgroup=javascriptDocSeeTag start="{" end="}" contains=javascriptDocTags
+	syntax region JSDocComment        matchgroup=javascriptComment start="/\*\*\s*$"  end="\*/" contains=JSDocTags,javascriptCommentTodo,@javascriptHtml,jsInJsdocExample,@Spell fold
+	syntax match  JSDocTags           contained "@\(param\|argument\|returns\=\|requires\|exception\|throws\|type\|class\|extends\|see\|link\|member\|module\|method\|title\|namespace\|name\|memberof\|exports\|callback\|typedef\|property\|optional\|default\|base\|file\)\>" nextgroup=JSDocParam,JSDocSeeTag skipwhite
+	syntax match  JSDocTags           contained "@\(beta\|deprecated\|description\|fileoverview\|author\|license\|version\|constructor\|private\|protected\|final\|ignore\|addon\|exec\)\>"
+	syntax match  JSDocParam          contained "\%(#\|\w\|\.\|:\|\/\)\+"
+	syntax region JSDocSeeTag         contained matchgroup=JSDocSeeTag start="{" end="}" contains=JSDocTags
 
 	syntax case match
 endif
@@ -162,7 +162,7 @@ syntax keyword javascriptEventListenerMethods     scrollIntoView  addEventListen
 	endif
 " end DOM/HTML/CSS specified things }}}
 " Code blocks"{{{
-syntax cluster javascriptAll       contains=javascriptComment,javascriptLineComment,javascriptDocComment,javascriptString,javascriptRegexpString,javascriptNumber,javascriptFloat,javascriptLabel,javascriptSource,javascriptWebAPI,javascriptOperator,javascriptBoolean,javascriptNull,javascriptFuncKeyword,javascriptConditional,javascriptGlobal,javascriptRepeat,javascriptBranch,javascriptStatement,javascriptGlobalObjects,javascriptMessage,javascriptIdentifier,javascriptExceptions,javascriptReserved,javascriptDeprecated,javascriptDomErrNo,javascriptDomNodeConsts,javascriptHtmlEvents,javascriptDotNotation,javascriptBrowserObjects,javascriptDOMObjects,javascriptAjaxObjects,javascriptPropietaryObjects,javascriptDOMMethods,javascriptHtmlElemProperties,javascriptDOMProperties,javascriptEventListenerKeywords,javascriptEventListenerMethods,javascriptAjaxProperties,javascriptAjaxMethods,javascriptFuncArg
+syntax cluster javascriptAll       contains=javascriptComment,javascriptLineComment,JSDocComment,javascriptString,javascriptRegexpString,javascriptNumber,javascriptFloat,javascriptLabel,javascriptSource,javascriptWebAPI,javascriptOperator,javascriptBoolean,javascriptNull,javascriptFuncKeyword,javascriptConditional,javascriptGlobal,javascriptRepeat,javascriptBranch,javascriptStatement,javascriptGlobalObjects,javascriptMessage,javascriptIdentifier,javascriptExceptions,javascriptReserved,javascriptDeprecated,javascriptDomErrNo,javascriptDomNodeConsts,javascriptHtmlEvents,javascriptDotNotation,javascriptBrowserObjects,javascriptDOMObjects,javascriptAjaxObjects,javascriptPropietaryObjects,javascriptDOMMethods,javascriptHtmlElemProperties,javascriptDOMProperties,javascriptEventListenerKeywords,javascriptEventListenerMethods,javascriptAjaxProperties,javascriptAjaxMethods,javascriptFuncArg
 
 if main_syntax == "javascript"
 	syntax sync clear
@@ -213,12 +213,12 @@ if version >= 508 || !exists("did_javascript_syn_inits")
 
 	HiLink javascriptComment                Comment
 	HiLink javascriptLineComment            Comment
-	HiLink javascriptDocComment             Comment
+	HiLink JSDocComment                     Comment
 	HiLink javascriptCommentTodo            Todo
 
-	HiLink javascriptDocTags                Special
-	HiLink javascriptDocSeeTag              Function
-	HiLink javascriptDocParam               Function
+	HiLink JSDocTags                        Special
+	HiLink JSDocSeeTag                      Function
+	HiLink JSDocParam                       Function
 
 	HiLink javascriptString                 String
 	HiLink javascriptRegexpString           String
