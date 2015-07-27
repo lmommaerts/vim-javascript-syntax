@@ -1,8 +1,8 @@
 " Vim syntax file
 "      Language: JavaScript
 "    Maintainer: Jose Elera Campana <https://github.com/jelera>
-" Last Modified: Sun 26 Jul 2015 07:46:06 PM CDT
-"       Version: 0.8.1
+" Last Modified: Sun 26 Jul 2015 07:54:13 PM CDT
+"       Version: 1.0a
 "       Changes: Go to https://github.com/jelera/vim-javascript-syntax for
 "                recent changes.
 "       Credits: Zhao Yi, Claudio Fleiner, Scott Shattuck (This file is based
