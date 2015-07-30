@@ -177,8 +177,6 @@ syntax match   javaScriptObjectKey       /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\(\s*:\)\@
 syntax match   javaScriptFunctionKey     /\<[a-zA-Z_$][0-9a-zA-Z_$]*\>\(\s*:\s*function\s*\)\@=/ contained
 "}}}
 " Braces, Parens, symbols, colons {{{
-syntax match javaScriptBraces       "[{}\[\]]"
-syntax match javaScriptParens       "[()]"
 syntax match javaScriptOpSymbols    "=\{1,3}\|!==\|!=\|<\|>\|>=\|<=\|++\|+=\|--\|-="
 syntax match javaScriptEndColons    "[;,]"
 syntax match javaScriptLogicSymbols "\(&&\)\|\(||\)"
